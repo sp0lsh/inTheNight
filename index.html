@@ -35,17 +35,18 @@
 
 			this.setgame = function ( agame ) {
 				game = agame;
-			}
+			};
 				
 			// this will go from HTMLDocument!!!
 			this.checkKey = function ( e ) { 
 					
 				e = e || window.event;
 			
-				if ( game != null ) { 
+				if ( game !== null ) { 
 					game.pushEvent( e );
 				}
-			}
+			};
+			
 			console.log( "Input set up!" );
 		}
 		
@@ -85,7 +86,7 @@
 					var _cb = function() {
 						cb();
 						webkitRequestAnimationFrame( _cb );
-					}
+					};
 					_cb();
 				};
 			} else if ( window.mozRequestAnimationFrame ) {
@@ -93,13 +94,13 @@
 					var _cb = function() {
 						cb();
 						mozRequestAnimationFrame(_cb);
-					}
+					};
 					_cb();
 				};
 			} else {
 				onEachFrame = function(cb) {
-				setInterval( cb, game.INTERVAL );
-				}
+					setInterval( cb, game.INTERVAL );
+				};
 			}
         
 			window.onEachFrame = onEachFrame;
