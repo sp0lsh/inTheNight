@@ -1,0 +1,62 @@
+Po zakończeniu pracy skrypty należy zwalidować wykorzystując serwis: 
+http://www.javascriptlint.com/, http://www.jslint.com/ lub inny. 
+
+
+[ ] document.writeln() 
+[v] document.getElementById() 
+
+[ ] window.prompt() 
+[ ] window.alert() 
+[ ] window.addEventListener() 
+[ ] button.addEventListener() 
+
+[ ] właściwość innerHTML 
+[v] parseInt() 
+[v] parseFloat() 
+[v] Math.random() 
+[v] Math.floor() 
+[v] instrukcje sterujące: if…else, case, while, do…while, for 
+[v] zmienne globalne 
+
+
+
+Zademonstrować działanie metod JavaScript:
+	[ ] createElement, 
+	[ ] createTextNode,
+	[ ] appendChild,
+	[ ] insertBefore, 
+	[ ] replaceChild,
+	[ ] removeChild,
+	[ ] właściwości parentNode. 
+2. Zademonstrować działanie kolekcji:
+	[ ] images,
+	[ ] links,
+	[ ] forms,
+	[ ] anchors 
+	[ ] item
+	[ ] namedItem
+3. Umożliwić użytkownikowi zmianę na żądanie stylów CSS:
+	[ ] koloru tła,
+	[ ] koloru tekstu, 
+	[ ] rodzaju czcionki (z listy). 
+4. Zademonstrować możliwości właściwości:
+	[ ] altKey,
+	[ ] ctrlKey,
+	[ ] shiftKey 
+	[v] keyCode,
+	[ ] clientX,
+	[ ] clientY,
+	[ ] screenX,
+	[ ] screenY
+	[v] event. 
+Wykorzystać zdarzenia:
+	[ ] mousemove,
+	[v] mousedown,
+	[ ] mouseover,
+	[ ] mouseout. 
+5. W formularzach wykorzystać zdarzenia focus i blur do wyświetlania tekstów 
+pomocy oraz zdarzenia submit i reset do wyzwalania okien potwierdzających. 
+
+
+Funkcje JavaScript do poszczególnych zadań powinny znajdować sie w osobnych 
+plikach .js 
