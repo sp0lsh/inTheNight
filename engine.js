@@ -201,7 +201,7 @@ function TopDown ( aGame, canvas ) { 'use strict';
 		
 		this.ctx.beginPath();
 		this.ctx.arc( x, y, r, 0, 2 * Math.PI, false);
-		this.ctx.fillStyle = color;
+		//this.ctx.fillStyle = color;
 		this.ctx.fill();
 	};
 	
@@ -439,7 +439,7 @@ function ScanLine ( aGame, canvas ) { 'use strict';
 			var hitInfo = this.game.traceV( intPos, currTarget.toInt() );
 			var depth = lineOfSight;
 			if ( hitInfo.hit ) {
-				this.topDown.drawDotV( hitInfo.pos.toInt(), 1, 0xFFFF00 );
+				this.topDown.drawDotV( hitInfo.pos.toInt(), 1,0xFFFF00 );
 				
 				//depth = this.frustrumDepth( player, hitInfo.pos );
 				//var depth2 = this.perpendicularDepth( player, hitInfo.pos );

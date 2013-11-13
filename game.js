@@ -499,7 +499,7 @@ function GameObject( name ) {
 	this.pos = new Vec2();
 	this.width = 10;
 	this.height = 10;
-	this.color = "#FF00FF";
+	this.color = 0xFF00FF;
 	
 	this.vel = new Vec2();
 	

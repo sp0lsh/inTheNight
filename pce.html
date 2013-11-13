@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html> 
+	<head>
+		<title>Pointless feature</title>
+		<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+		<script type="text/javascript">
+			
+			var pointless = [ "Click again!", "Dare to click!", "Come here and click like a real man!" ];
+			var counter = 0;
+			var prize = 1000;
+			
+			function myFunction() {
+				counter++;
+				
+				alert( prize - counter + " clicks left" );
+				
+				if ( counter === prize ) {
+					alert( " Go back and study!" );
+				} else {
+					alert( prize - counter + " clicks left" );
+					var i = parseInt( pointless.length * Math.random() );
+					var c = document.getElementById( "text" ).innerHTML = pointless[i];
+					//console.log( c + " " + i );
+				}
+			};
+			
+			window.addEventListener( "mousedown", myFunction, false );
+			
+		</script> 
+	</head>
+	<body>
+	<h1 id="text">Pointless clicking experience</h1>
+	</body> 
+</html>

@@ -2,15 +2,16 @@ Po zakończeniu pracy skrypty należy zwalidować wykorzystując serwis:
 http://www.javascriptlint.com/, http://www.jslint.com/ lub inny. 
 
 
-[ ] document.writeln() 
+[v] document.writeln() 
 [v] document.getElementById() 
 
-[ ] window.prompt() 
-[ ] window.alert() 
-[ ] window.addEventListener() 
-[ ] button.addEventListener() 
+[v] window.prompt() 
+[v] window.alert() 
 
-[ ] właściwość innerHTML 
+[v] window.addEventListener() 
+[v] button.addEventListener() 
+
+[v] właściwość innerHTML 
 [v] parseInt() 
 [v] parseFloat() 
 [v] Math.random() 
