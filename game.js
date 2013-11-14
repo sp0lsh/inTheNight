@@ -132,6 +132,72 @@ function Game () { 'use strict';
 		
 	};
 
+	this.generateMap = function ( sizeX, sizeY ) {
+		
+		var map = new Array( sizeX );
+		for ( var x = 0; x < map.length; x++ ) {
+			map[x] = new Array( sizeY );
+			for ( var y = 0; y < map[x].length; y++ ) {
+				map[x][y] = Math.random() > 0.5;
+			}
+		}
+	
+		// clean where player spawns
+		map[3][3] = false;
+		map[3][3 - 1] = false;
+		map[3][3 + 1] = false;
+		map[3 - 1][3] = false;
+		map[3 + 1][3] = false;
+		map[3 - 1][3 - 1] = false;
+		map[3 - 1][3 + 1] = false;
+		map[3 + 1][3 - 1] = false;
+		map[3 + 1][3 + 1] = false;
+		
+		//this.cellAut( map, 5 );
+		map = this.cellAut( map, 4 );
+		map = this.cellAut( map, 5 );
+	
+		return map;
+	};
+	
+	//cellular automata
+	this.cellAut = function ( map, thr ) {
+	
+		var newMap = new Array( map.lenght );
+		for ( var x = 0; x < map.length; x++ ) {
+			newMap[x] = new Array( map[x].lenght );
+			for ( var y = 0; y < map[x].length; y++ ) {
+				newMap[x][y] = ( thr > this.countAdj( map, x, y ) );
+			}
+		}
+		return newMap;
+	};
+	
+	this.countAdj = function ( map, x, y ) {
+		var adj = 0;
+		var ind = [ [x, (y - 1)],
+					[x, (y + 1)],
+					[(x - 1), y],
+					[(x + 1), y],
+					[(x - 1), (y - 1)],
+					[(x - 1), (y + 1)],
+					[(x + 1), (y - 1)],
+					[(x + 1), (y + 1)] ];
+		
+		// check if in range and if has value
+		for ( var i = 0; i < ind.length; i++ ) {
+			var pair = ind[i];
+			if ( pair[0] >= 0 && pair[0] < map.length
+				&& pair[1] >= 0 && pair[1] < map[pair[0]].length
+				&& !map[pair[0]][pair[1]])
+			{
+				adj++;
+			}
+		}
+		
+		return adj;
+	}
+	
 	this.createMap = function () {
 		var o = false;
 		var X = true;
@@ -166,7 +232,9 @@ function Game () { 'use strict';
 	//===========================
 
 	this.start = function() {
-		this.map = this.createMap();
+		//this.map = this.createMap();
+		this.map = this.generateMap( 60, 35 );
+		//this.map = this.generateMap( 5, 5 );
 		this.initPlayer();
 	};
 

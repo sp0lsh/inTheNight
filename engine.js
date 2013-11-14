@@ -201,7 +201,7 @@ function TopDown ( aGame, canvas ) { 'use strict';
 		
 		this.ctx.beginPath();
 		this.ctx.arc( x, y, r, 0, 2 * Math.PI, false);
-		//this.ctx.fillStyle = color;
+		this.ctx.fillStyle = "#00FF00";
 		this.ctx.fill();
 	};
 	
@@ -502,7 +502,8 @@ function ScanLine ( aGame, canvas ) { 'use strict';
 		
 		var maxWallHeight = this.maxWallHeight;
 		var minWallHeight = this.minWallHeight;
-		var height = maxWallHeight * ( 1 - depth );
+		//var height = maxWallHeight * ( 1 - depth );
+		var height = maxWallHeight * ( 1 - Math.sin( depth ) ); // works
 		height = Math.max( height, minWallHeight );
 		
 		//height *= 
