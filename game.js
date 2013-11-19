@@ -43,7 +43,8 @@
 //
 //	Content:		remake of Hovertank 3D (id Software) in javascript
 //
-//	Author:			Michał 'spolsh 'Kłoś
+//	Author:			Programmer: Michał 'spolsh 'Kłoś
+//					Designer:	Michał Droń
 //	Email:			michal.m.klos@gmail.com
 //
 //	Framework:		HTML5 Canvas + Bresenham Line drawing algorithm
