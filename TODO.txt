@@ -21,25 +21,25 @@ http://www.javascriptlint.com/, http://www.jslint.com/ lub inny.
 
 
 
-Zademonstrować działanie metod JavaScript:
-	[ ] createElement, 
-	[ ] createTextNode,
-	[ ] appendChild,
-	[ ] insertBefore, 
+1. Zademonstrować działanie metod JavaScript:
+	[v] createElement, 
+	[v] createTextNode,
+	[v] appendChild,
+	[v] insertBefore, 
 	[ ] replaceChild,
 	[ ] removeChild,
 	[ ] właściwości parentNode. 
 2. Zademonstrować działanie kolekcji:
-	[ ] images,
-	[ ] links,
-	[ ] forms,
-	[ ] anchors 
+	[v] images,
+	[v] links,
+	[v] forms,
+	[v] anchors 
 	[ ] item
 	[ ] namedItem
 3. Umożliwić użytkownikowi zmianę na żądanie stylów CSS:
-	[ ] koloru tła,
-	[ ] koloru tekstu, 
-	[ ] rodzaju czcionki (z listy). 
+	[v] koloru tła,
+	[v] koloru tekstu, 
+	[v] rodzaju czcionki (z listy). 
 4. Zademonstrować możliwości właściwości:
 	[ ] altKey,
 	[ ] ctrlKey,

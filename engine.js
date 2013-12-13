@@ -285,7 +285,7 @@ function ScanLine ( aGame, canvas ) { 'use strict';
 	//this.scansConst = 5;
 	this.scans = 0;
 	
-	this.minWallHeight = 0.05;
+	this.minWallHeight = 0.01;
 	this.maxWallHeight = 0.95;
 	
 	this.colorNear = new RGBA();
@@ -294,22 +294,22 @@ function ScanLine ( aGame, canvas ) { 'use strict';
 	this.colorCeiling = new RGBA();
 	this.colorFloor = new RGBA();
 	
-	this.addNoise = true;
-	this.addNoise = false;
-	this.maxNoise = 0x03;
-	//this.maxNoise = 0x10;
+	// this.addNoise = true;
+	// this.addNoise = false;
+	// this.maxNoise = 0x03;
+	// //this.maxNoise = 0x10;
 	
-	this.addDust = true;
-	this.maxDust = 0x03;
-	this.maxDustQuota = 1000;
-	//this.maxDustQuota = 2000;
-	this.dusts = [];
+	// this.addDust = true;
+	// this.maxDust = 0x03;
+	// this.maxDustQuota = 1000;
+	// //this.maxDustQuota = 2000;
+	// this.dusts = [];
 	
-	for ( var i = 0; i < this.maxDustQuota; i++ ) {
-		var dust = new Dust();
-		dust.rand( 0, this.c.width, 0, this.c.height );
-		this.dusts.push( dust );
-	}
+	// for ( var i = 0; i < this.maxDustQuota; i++ ) {
+		// var dust = new Dust();
+		// dust.rand( 0, this.c.width, 0, this.c.height );
+		// this.dusts.push( dust );
+	// }
 	
 	if ( this.scansConst === 0 ) {
 		this.scans = justParseInt( this.c.width * this.scansFactor );
@@ -356,7 +356,7 @@ function ScanLine ( aGame, canvas ) { 'use strict';
 		
 		this.scanLine();
 		
-		this.drawDusts();
+//		this.drawDusts();
 		
 		this.ctx.putImageData( this.imgTarget, 0, 0 );
 	};
@@ -448,7 +448,7 @@ function ScanLine ( aGame, canvas ) { 'use strict';
 				// console.log( "d1: " + depth + " d2: " + depth2 );
 			}
 			
-			stripes.push( this.drawWallStripe( i, depth, lineOfSight ) );
+			stripes.push( this.createWallStripe( i, depth, lineOfSight ) );
 		}
 		
 		this.drawStripes( stripes );
@@ -474,7 +474,7 @@ function ScanLine ( aGame, canvas ) { 'use strict';
 		return target;
 	};
 	
-	this.drawWallStripe = function ( i, depth, lineOfSight ) {
+	this.createWallStripe = function ( i, depth, lineOfSight ) {
 		
 		//console.log( depth + " , " + RAD_TO_DEG( angle ) + " , "+ fov );	
 		//console.log( i + " , " + depth + " , " + lineOfSight );	

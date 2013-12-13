@@ -77,6 +77,11 @@ function Game () { 'use strict';
 	this.CANVAS_SL_ID = "viewport";
 	this.FPS = 30;
 	this.INTERVAL = 1000 / this.FPS;
+	this.maxFrameSkip = 10;
+	this.ticks = 0,
+	
+	this.updateTimeAvg = 0;
+	this.drawBeginAvg = 0;
 
 
 	/// INPUT
@@ -111,11 +116,14 @@ function Game () { 'use strict';
 	//===========================
 	//   INIT
 	//===========================
-
+	
 	this.map = [];					// actual map
 	this.objs = [];					// gameobjects updated in game
 	this.input = new InputKeys();
 
+	// Stats:
+	this.stats = null;
+	
 	// Engines:
 	this.topDown = null;		// left eye
 	this.scanLine = null;		// right eye
@@ -237,16 +245,14 @@ function Game () { 'use strict';
 		this.map = this.generateMap( 60, 35 );
 		//this.map = this.generateMap( 5, 5 );
 		this.initPlayer();
+		
+		//this.setupOnEachFrame( this.run );
 	};
 
 	this.addGameObj = function( gameObj ) {
 		gameObj.game = this;
 		this.objs.push( gameObj );
 	};
-
-	this.addRect = function() {
-		this.entities.push(new Rect());
-	};	
 
 	this.findByName = function ( name ) {
 		
@@ -286,13 +292,13 @@ function Game () { 'use strict';
 	this.checkKey = function ( e ) { 
 		
 		this.input = this.gatherInput( e, this.input );
-		this.controlGame( e, game );
+		this.controlGame( e, this );
 		
 	};
 	
 	this.controlGame = function ( e ) {
-		if ( e.type === game.INPUT_EVENT_TYPE_KEYDOWN ) {
-			if ( e.keyCode === game.INPUT_KEY_ESC ) {
+		if ( e.type === this.INPUT_EVENT_TYPE_KEYDOWN ) {
+			if ( e.keyCode === this.INPUT_KEY_ESC ) {
 				console.log("exit " + Context.intervalId );
 				clearInterval( Context.intervalId );
 			}
@@ -308,38 +314,38 @@ function Game () { 'use strict';
 						// + input.up + ", " 
 						// + input.down );
 		
-		if ( e.type === game.INPUT_EVENT_TYPE_KEYDOWN ) {
-			if ( e.keyCode === game.INPUT_KEY_ARROW_LEFT ) {
+		if ( e.type === this.INPUT_EVENT_TYPE_KEYDOWN ) {
+			if ( e.keyCode === this.INPUT_KEY_ARROW_LEFT ) {
 				input.left = true;
 			}
 	
-			if ( e.keyCode === game.INPUT_KEY_ARROW_RIGHT ) {
+			if ( e.keyCode === this.INPUT_KEY_ARROW_RIGHT ) {
 				input.right = true;
 			}
 	
-			if ( e.keyCode === game.INPUT_KEY_ARROW_UP ) {
+			if ( e.keyCode === this.INPUT_KEY_ARROW_UP ) {
 				input.up = true;
 			}
 	
-			if ( e.keyCode === game.INPUT_KEY_ARROW_DOWN ) {
+			if ( e.keyCode === this.INPUT_KEY_ARROW_DOWN ) {
 				input.down = true;
 			}
 		}
 		
-		if ( e.type === game.INPUT_EVENT_TYPE_KEYUP ) {
-			if ( e.keyCode === game.INPUT_KEY_ARROW_LEFT ) {
+		if ( e.type === this.INPUT_EVENT_TYPE_KEYUP ) {
+			if ( e.keyCode === this.INPUT_KEY_ARROW_LEFT ) {
 				input.left = false;
 			}
 	
-			if ( e.keyCode === game.INPUT_KEY_ARROW_RIGHT ) {
+			if ( e.keyCode === this.INPUT_KEY_ARROW_RIGHT ) {
 				input.right = false;
 			}
 	
-			if ( e.keyCode === game.INPUT_KEY_ARROW_UP ) {
+			if ( e.keyCode === this.INPUT_KEY_ARROW_UP ) {
 				input.up = false;
 			}
 	
-			if ( e.keyCode === game.INPUT_KEY_ARROW_DOWN ) {
+			if ( e.keyCode === this.INPUT_KEY_ARROW_DOWN ) {
 				input.down = false;
 			}
 		}
@@ -357,6 +363,34 @@ function Game () { 'use strict';
 	//	Update
 	//===========================
 
+	this.run = function () {
+		
+		var updateBegin = Date.now();
+		
+		//console.log( "logic update @ tick " + this.ticks );
+		
+		this.update();
+		this.ticks++;
+		
+		var draws = 0;
+		var drawingTime = 0;
+		var drawBegin = Date.now();
+		do {
+			this.draw();
+			draws++;
+			
+			drawingTime += ( Date.now() - drawBegin );
+		} while ( Date.now() - updateBegin + drawingTime / draws < this.INTERVAL );
+		
+		// stats
+		this.updateTimeAvg = 0.1 * ( Date.now() - updateBegin ) + 0.9 * this.updateTimeAvg;
+		this.drawBeginAvg = 0.1 * drawingTime + 0.9 * this.drawBeginAvg;
+		
+		stats.setText( "draws: " + draws
+						+ " FPS: " + ( 1000 / this.updateTimeAvg ).toFixed( 1 )
+						+ " drawing: " + ( 1000 / this.drawBeginAvg ).toFixed( 1 ) );
+	}
+	
 	this.update = function() {
 	
 		var player = this.findByName( "player" );
@@ -371,7 +405,8 @@ function Game () { 'use strict';
 		for ( var i = 0; i < this.objs.length; i++ ) {
 			this.objs[i].update();
 		}
-	};		
+	};	
+
 
 	//===========================
 	//   Collision
@@ -500,6 +535,7 @@ function Game () { 'use strict';
 	
 	// Log that everything was ok.
 	console.log( "Game assembled!" );
+	
 }
 
 //
